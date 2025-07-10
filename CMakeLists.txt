@@ -12,16 +12,13 @@
 # Public License along with hpp-universal-robot.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.22)
 
 set(PROJECT_NAME hpp-universal-robot)
 set(PROJECT_DESCRIPTION
     "Data specific to ur5 and 10 robots for hpp-corbaserver")
 
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
-
-option(BUILD_PYTHON_INTERFACE "Build the python bindings" ON)
-option(INSTALL_PYTHON_INTERFACE_ONLY "Install *ONLY* the python bindings" OFF)
 
 # Check if the submodule cmake have been initialized
 set(JRL_CMAKE_MODULES "${CMAKE_CURRENT_LIST_DIR}/cmake")
@@ -35,14 +32,6 @@ else()
       TARGET jrl-cmakemodules::jrl-cmakemodules
       PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
     message(STATUS "JRL cmakemodules found on system at ${JRL_CMAKE_MODULES}")
-  elseif(${CMAKE_VERSION} VERSION_LESS "3.14.0")
-    message(
-      FATAL_ERROR
-        "\nCan't find jrl-cmakemodules. Please either:\n"
-        "  - use git submodule: 'git submodule update --init'\n"
-        "  - or install https://github.com/jrl-umi3218/jrl-cmakemodules\n"
-        "  - or upgrade your CMake version to >= 3.14 to allow automatic fetching\n"
-    )
   else()
     message(STATUS "JRL cmakemodules not found. Let's fetch it.")
     include(FetchContent)
@@ -70,7 +59,7 @@ add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME}
                       INTERFACE example-robot-data::example-robot-data)
 
-if(NOT INSTALL_PYTHON_INTERFACE_ONLY)
+if(NOT BUILD_STANDALONE_PYTHON_INTERFACE)
   install(
     TARGETS ${PROJECT_NAME}
     EXPORT ${TARGETS_EXPORT_NAME}
@@ -78,7 +67,3 @@ if(NOT INSTALL_PYTHON_INTERFACE_ONLY)
 endif()
 
 add_subdirectory(src)
-
-if(NOT INSTALL_PYTHON_INTERFACE_ONLY)
-  install(FILES package.xml DESTINATION share/${PROJECT_NAME})
-endif()
