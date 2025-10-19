@@ -26,7 +26,7 @@
           packages = {
             default = self'.packages.hpp-universal-robot;
             hpp-universal-robot = pkgs.python3Packages.hpp-universal-robot.overrideAttrs {
-              src = pkgs.lib.fileset.toSource {
+              src = lib.fileset.toSource {
                 root = ./.;
                 fileset = lib.fileset.unions [
                   ./CMakeLists.txt
