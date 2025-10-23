@@ -12,7 +12,7 @@ dependencies = [
 description = "Data specific to ur5 and 10 robots for hpp-corbaserver"
 license = "BSD-2-Clause"
 name = "hpp-universal-robot"
-version = "6.0.0"
+version = "6.1.0"
 
 [tool.ruff]
 extend-exclude = ["cmake"]
