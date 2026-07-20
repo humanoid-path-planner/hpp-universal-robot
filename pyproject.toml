@@ -1,5 +1,5 @@
 [build-system]
-build-backend = "cmeel.build"
+build-backend = "cmeel"
 requires = [
   "cmeel[build]",
   "example-robot-data[build]"
@@ -12,10 +12,16 @@ dependencies = [
 description = "Data specific to ur5 and 10 robots for hpp-corbaserver"
 license = "BSD-2-Clause"
 name = "hpp-universal-robot"
+requires-python = ">= 3.10"
 version = "9.0.0"
 
-[tool.ruff]
-extend-exclude = ["cmake"]
+[project.urls]
+homepage = "https://github.com/cmake-wheel/hpp-universal-robot"
+repository = "https://github.com/cmake-wheel/hpp-universal-robot.git"
+upstream = "https://github.com/humanoid-path-planner/hpp-universal-robot"
+
+[tool.cmeel]
+has-binaries = false
 
 [tool.ruff.lint]
 extend-select = ["I", "NPY", "RUF", "UP", "W"]
