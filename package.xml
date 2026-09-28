@@ -8,7 +8,7 @@
   <license>LGPL-3.0-or-later</license>
 
   <depend>python3</depend>
-  <depend>example_robot_data</depend>
+  <depend>example_robot_descriptions</depend>
 
   <buildtool_depend>cmake</buildtool_depend>
   <build_depend>jrl_cmakemodules</build_depend>
